@@ -23,7 +23,7 @@ h6 {
 	color: darkslateblue
 }
 
-article.main-content {
+.main-content {
 	background: #fff;
 	max-width: 900px;
 	margin: 0 auto;
