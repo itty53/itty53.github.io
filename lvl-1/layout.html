@@ -1,0 +1,82 @@
+<!doctype html>
+<!--
+    Same shit, different page. -->
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Lesson 2 - Basic Styles  |  Chris's Fucking Tutorial.</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, zoom=1">
+  
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+  <!--
+  These two bits above tell the page to load the two files. "href" is basically the file path: in this case it is RELATIVE: It's referring to a folder named "CSS" which contains the .css files, and that "CSS" folder is in the same folder as this document resides.
+
+    I included those because they basically "reset" the browser to use a standard set of styles. Each browser is just a LITTLE different, and that means a pain in the ass. These are typically called "CSS Reset" files. 
+    
+    You'll often find yourself linking to files you don't understand. It's not *THAT* big a deal but over time you ought to pay a little attention as they can insert security problems. Long time off from that worry.  
+    
+    You can browse those two files if you like, but they're complicated. 
+  
+  -->
+  
+  <!-- This is a style container we'll use at the end of this page, you'll come back to it so skip it for now. -->
+  <style>
+      .class-name { font-weight bold; font-size: 20px; text-decoration: underline;  }
+      .chris-is-a-douche { text-transform: uppercase };
+      #anID { background: gray; color: blue };
+  </style>
+</head>
+
+<body style="padding: 16px">
+    <!-- Look ma! a style attribute! -->
+    
+    <p>
+        Typography is how the words look, and humans think it isn't important right up until it looks bad and then it hurts our eyes. The trick to good typography is to keep it simple and logical. This page won't look great.
+    </p>
+    <p style="font-weight: bold">
+        Here's our first styled element, making this entire paragraph bold. 
+    </p>
+    <p style="font-weight: bold; text-decoration: underline; border: 1px solid #FF0000">
+        You can add more styles as long as you separate each with a semi-colon. 
+    </p>
+    
+    <h2 style="border-bottom: 1px solid #0000FF">Of course we can style other things. <span style="font-family: Helvetica, Verdana, sans-serif; color: Magenta">Even things within things.</span></h2>
+    <div style="background: rgba(0,0,0,0.5); color: #fff; font-size: 20px">
+        <p>See the darkness of my div and note that the styles in the PARENT container affect its CHILD elements.</p>
+    </div>
+    <p>So we've got font-weight, borders, decoration, font-family (the name of the font), and a few ways to show color on the text ('color') and the container ('background'). Note that all these styles can be applied to any element. </p>
+    <p>Couple things to point out right now: I can't write up a comprehensive tutorial for you, it'd take years. You'll need to learn how to look up your basic styles. Just google "css [whatever you're trying to do]". But I can go through the basics here:</p>
+    <p>With color, those that are like #0000FF are called hex colors. They represent RED, BLUE, and GREEN, two digits each in its hex-value, which is like a code for numbers. You'll see letters AND numbers. The only letters are A through F. You also saw "rgba(0,0,0,0.5)". That's also RGB but with an alpha value, making it kinda transparent. That value can be any decimal between 0 and 1, with 0 being totally invisible and 1 being as visible as it gets (no transparency). These color codes can be used to enter color on any color-related thing. Border color, font color, background, etc. </p> 
+    <p>Speaking of border, you saw me use 'border' and 'border-bottom'. You can guess: 'border-left', 'border-right', and 'border-top' are also things too. But 'border' assumes all 4. That also used 3 values in its attribute: A width in pixels (or any unit), a style (solid, dashed, dotted, etc), and a color. Some CSS 'rules' have multiple values, but if they're not specified then defaults will be used. </p>
+    <p>Similarly you saw three font-names under 'Font Family'. Thats saying "use the first, if it isn't on the user's computer then use the second". That last one "sans-serif" just says "use the computer's standard sans-serif font". If you don't know, serif means the letters have the little flourishes on the tips like Times New Roman does. sans-serif is without those. All fonts can be broken into those two categories, at the very least.</p>
+    <p>There are a lot of typographic rules involving indents, when/where/if to use an automatic line-break (to "word-wrap" or not), and some other bits. You can google those, we're staying basic.</p>
+    
+    <!--- Here you see color shorthand: #222 is the same as #222222. #2ac would be the same as #22AACC. Anytime you see the same all across, that's a shade of gray, or black (#000000, or rgba(0,0,0)) or white (#FFFFFF or rgba(255,255,255)). -->
+    <h2 style="padding: 1em 0.5em 1em 0.5em; background: #ccc; margin: 2em; border: 1px solid #222">
+        What about space?
+    </h2>
+    <p> The world of padding, margin, units, and the box-model. Look at the header above: it's moved in on all sides with white space, but it has a background that has yet more space within. The outside of that box is the margin. The inside is the padding. That's it, that's the box model. Memorize it. Margin outside. Padding inside. This seems like a small thing right now, but it factors into literally everything. </p>
+    
+    <p>Okay, all of this is starting to get a bit difficult on the eyes, right? So far we've been using inline-styles, contained within each element it styles. There's two problems here; One, it sucks to code and read. Two, if you need to re-use the same style over and over AND THEN IT CHANGES, you have to change it everywhere. Pain in the ass. So bottom line, <strong>never do it.</strong> Instead, use classes.</p>
+    <p class="class-name">
+        Way more simple, right? You saw the tag in the head of the document, that's what this is referring to. This element has all of the style rules given by the class named "class-name". 
+    </p>
+    <p class="chris-is-a-douche">
+        You can name classes anything you want, as you can see. Almost anyway: they can't start with a number, and they cannot have any spaces. When declaring a class in the head, you use a period to indicate "this is a class". When listing a class in an attribute like this paragraph tag, there is no period.
+    </p>
+    <p id="anID">
+        There' also IDs. IDs are kinda different, and rarely should be used for the sake of styling. In the head, you see this is referred to by the hash #anID. Again, that only goes in that style tag, not in the paragraph element. An important part about IDs: You cannot re-use them. Only one element on the page can have a given ID. That's one reason not to use them for styles, there's others I won't get into. General rule: Don't do this.
+    </p>
+    <p class="class-name chris-is-a-douche">
+        And finally, we can combine classes this way. This paragraph element has the rules given by both of the classes, we just separate the rule names with a space. 
+    </p>    
+    <p>
+        So that's the basics of styling, but that's like saying "cars have four wheels, that's the basics of driving". On <a href="lvl-1/basic-layout.html">the next page</a> we'll do a basic layout and show how styles should be used.
+    </p>
+</body>
+
+<!-- <html> ends -->
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<!--
+    Same shit, different page. -->
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Lesson 4 - Shit gets real.  |  Chris's Fucking Tutorial.</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, zoom=1">
+  
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+
+<!-- All that stuff we did before? In this file now. -->
+  <link rel="stylesheet" href="css/basic-layout.css">
+
+<!-- 
+    And all the stuff for this page is in this file. Get used to working with multiple files open and jumping back and forth. 
+    We're gonna talk about INHERITANCE and SPECIFICITY. What that means is how and when rules interact with others, and how they override each other.
+    
+    Lesson One: Rules are read and modified from top to bottom. If anything in the file below targets the same selectors as the file above, the one below is what gets used. It reads second.
+    
+    As you incorporate more and more outside files, this becomes more and more important. Good practice makes this easy. Being lazy makes this hard, and paradoxically costs you more time in the long run. 
+
+    Anyway, open the file below in a separate window and get used to going back and forth. 
+-->
+  <link rel="stylesheet" href="css/intermediate.css">
+
+  <style>
+      
+  </style>
+    
+</head>
+
+<body>
+    <div class="main-content container">
+        <header>
+            <h1>Chris's Fucking Tutorial</h1>
+            <p>An exercise in teaching a russian jew how to do something other than smoke weed.</p>
+                <small>(Here's a new tag: Small stuff. Anyway I didn't need a menu, you'll get a table of contents instead.)</small>
+        </header>
+        
+        
+        <section class="page-content">
+            <p>Now we come down to the real stuff. You should start at the top and work down. I've marked items that aren't going to be really heavily covered with <em>*</em>. These are things that are more important to be familiar with if you're primarily front end. If you go that route, you'll be educated enough to dive into that stuff on your own by the time you get there.
+            <ul>
+                <li>
+                    Selectors: 
+                    <ul>
+                        <li><a href="#specificity">Specificity and Inheritance</a></li>
+                    <li>Containers, (Not) Parents, Siblings, Children</li>
+                    <li>Hover, Focus, Active</li>
+                    <li>Attributes, etc.</li>
+                    </ul>
+                </li>
+                <li>
+                    Advanced Layouts: 
+                    <ul>
+                        <li>Float and Clearfix</li>
+                        <li>Position</li>
+                        <li>Flex</li>
+                        <li>Grid</li>
+                    </ul>
+                </li>
+                <li>
+                    Advanced CSS:
+                    <ul>
+                        <li>
+                            Transitions
+                        </li>
+                        <li>
+                            Transforms
+                        </li>
+                        <li>
+                            Media Queries
+                        </li>
+                        <li>
+                              Animations, SCSS/SASS and the rest.      
+                        </li>
+                    </ul>
+                </li>
+            </ul>           
+        </section>
+        <!-- That link in the Table of Contents above directs to the location of the element with id of "specificity", because it's href is "#....", starts with a #. -->
+        <article id="specificity">
+        <h2>Specificity and Inheritance</h2>
+            <p>
+                Specificity and inheritance determine how rules are applied. Let's check out the rules below:
+                <!-- The <pre> tag is used to make text breaks recognized by the browser. Note there are no <br> tags, just line breaks in the code -->
+                <pre>
+                    h1 { color: blue }                    
+                    .main-body { color: red } 
+                </pre>
+                and the markup:
+                <pre>
+                    &lt;div class="main-body">
+                        &lt;h1>What color am I going to be?</h1>
+                    &lt;/div>
+                </pre>
+            </p>
+        </article>
+    </div>
+</body>
+
+<!-- <html> ends -->
+</html>

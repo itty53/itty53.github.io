@@ -1,0 +1,215 @@
+<!doctype html>
+<!--
+    Hi Chris. This is your tutorial. 
+    We're gonna start off real simple and slowly build up.
+     
+    First things first:  This text is within a COMMENT. 
+    See the bracket with ! at the beginning? That starts a comment.
+    The two dashes and closing bracket ends it. Comments don't appear on the page,
+    but can be seen within the inspector. 
+    
+    You should DEFINITELY be reading all this within a code-editor that has color-context: Tags look different than comments, etc. Otherwise this is gonna be hell. 
+-->
+
+
+<!--
+   Standard lingo: A <tag> is the basic HTML operator. Everything is a tag. If the TAG is something the user sees on the browser, that's called an "ELEMENT".
+   
+   When you see <tag name="value" othername="othervalue"> those 'name' bits are called ATTRIBUTES. Every tag has certain standard ones, like "ID" and "style" and "class". Some have their own unique ones you'll learn later.
+   
+   Some tags need a closing tag, </tag> with the forward slash. Others are self closing like <br />. Some can be either/or. <br> and <br /> both work. <BR> works the same as <bR> or whatever: case doesn't matter. 
+  
+    Habits: 
+        - Use tab, not spaces. 
+        - Get to know keyboard shortcuts: they are a life saver. 
+        - Pay attention to keeping yourself and your page organized. FROM THE START. Easy to do if you always do it, and it's hell to manage later if you don't. 
+        - Use comments yourself. EVery time I sit down to make a program, I make comments to write out the logic. "We do this first, then this, then that". Then build around it.  
+          
+  
+  Got it? Let's begin.   
+--> 
+
+
+<!--
+ Every HTML doc starts with that doctype tag at the first line. If you're building sites for IE8, it might matter, otherwise it should always read exactly like that: "<!doctype html>", first line. Will it work without that? Yes. But not always. HTML is very forgiving, until it's not. 
+-->
+
+
+<!--
+    Below is the <html> tag, which begins the HTML document. That contains everything, including what the user sees and what you refer to. 
+-->
+<html>
+
+<head>
+    <!-- The <head> of the document is not something users see. It's where you tell your page where to look for other files and pages.
+    It's also where you tell stuff to things other than the browser window. 
+    Below is the barebones minimum you'll always want to start with. You don't need it per-se, but you will want it.
+    
+    meta charset -- tells the browser how to interpret your text. 99.99999% of the time you want utf-8. 
+    title -- the text displayed on the browser tab. Short, sweet. 
+    meta description -- used by a bunch of stuff online, always a good idea to remember to fill out. 
+    meta viewport -- because so many browsers exist now, on phones and laptops and microwaves and refrigerators, you need to tell them how to view your page (in general terms). 
+                     You don't need to understand the content of this right now, but again 99.999999% of the time you want it looking like it does below.    
+                     
+     The order of the tags within the <head> element can matter sometimes. The page is read from top to bottom, so if you declare some rule twice, the SECOND one will be the one applied. It overwrites the first, because it's read second. Other times it doesn't matter, assuming they're not conflicting with each other. 
+    -->
+  <meta charset="utf-8">
+  <title>Lesson 1  |  Chris's Fucking Tutorial.</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, zoom=1">
+
+<!-- and we close the <head> tag -->
+</head>
+
+<!-- The body is where your content goes. Everything the user sees. -->
+<body>
+<h1>This is a fucking header tag. Header 1 to be specific. It's the biggest by default.</h1>
+<h2>H2 is the next size down.</h2>
+<h3>And so on and so forth.</h3>
+<h4>Headers by default have a given font-size, are bold by default, and bring their own margins. We'll talk about margin later.</h4>
+<h5>Headers are also "block" elements. Blocks always try to be 100% wide, and always push whatever follows to the next line.</h5>
+<h6>And this should be tiny (but still a header... this will matter soon).</h6>
+
+<p>That's the end of headers. This is a paragraph tag. I bet you can guess what it's used for, right? Paragraphs of text. Keep the content as text and very few elements. You can use stuff like <strong>bold text</strong> or <em>emphasized text</em> or <u>underlined text</u>. By the way <strong>this</strong> and <b>this</b> are the same. So is <i>this</i> and <em>this.</em> <Sup>Also this.</Sup> <sub>And this.</sub> <Strike>and this</Strike>As you can see each of those elements did not push the following content down a line: These are not block elements, they're "inline". "Inline" elements don't have margin and only use left/right padding. More on that later. There's also the &lt;span&gt; tag that's useful, in that it does nothing but separate stuff into elements but keeping them inline.</p>
+
+<br /><Br /><BR>
+    <p>Three line breaks, note that case does not matter, and it can self-close or not, but if it doesn't, there is no &lt;/br&gt; tag. Don't use line breaks where a block element will do. Paragraphs are block elements, so they don't need those line breaks between them. In fact if you're using the line break tag you're probably doing it wrong. Probably. </p>
+    <hr />
+    <p>That is a "horizontal ruler" and it operates like a double line break, but has a neat line.</p> 
+    <p> By the way, those little things looking like &amp;? Those are called "html entities" and almost every character you can think of has a corresponding entity. It's a way to print HTML code so the browser doesn't parse it as actual HTML. This is also often how you'd show "special symbols". Some useful ones: &reg; &trade; &copy; &bull; &ndash; &mdash; &hellip; You can look up others if you care to. They can come in handy.</p> 
+    <p>
+        Headers bring their own margins, and paragraphs bring in their own padding. They seem very similar ("spaced around"), but they're not the same thing. Again, we'll get to that.
+    </p>
+    <ul>
+        <li>Not everything is in a paragraph. This is an unordered list.</li>
+        <li>Lists bring their own default styles as well.</li>
+        <li>You'll also note the list comes *outside* of a paragraph, not inside of one. That's a semantic issue we'll get to later.</li>
+    </ul>
+    <ol>
+        <li>This is an ordered list.</li>
+        <li>It's similar but uses actual numbers. Those are the defaults, and can be changed.</li>
+    </ol>
+    <ul>
+        <li> Guess what?
+            <ol>
+                <li>You can mix and match.</li>
+                <li>Because lists have lists.</li>
+            </ol>
+        </li>
+        <li>
+            See?
+        </li>
+    </ul>
+    
+    <div>
+        <p>This is a paragraph within a div. A div "divides content" and it's the basic building block of layouts. Not really descriptive right? You might note that I've already described certain things that seem to act the same but aren't? In this game, that's called semantics, and it matters. Semantics matter because not everyone is using your typical browser to look at your website. There's blind people using screen-readers, and also search engines and even other websites that want to know your content in a way that MAKES SENSE. A &lt;div&gt; tag doesn't mean anything but "this is a block of content", it is not semantic. It's a block element, and it contains other stuff, or divides its content from other content.</p> 
+        <p>Note I'm still using the paragraph tag. That's important, for semantics AND for styling stuff (when we get to it). There's literally NEVER a time you'd want to just put text in something other than an element meant for it.</p>
+    </div>
+    <section>
+        <p>The section. It acts like a &lt;div&gt;. Semantically it breaks up sections.</p>
+    </section>
+    <article>
+        <p>The article. Another glorified &lt;div&gt;: it contains articles. Here's the rest, and you ought to be able to figure them out.</p>
+        <ul>
+            <article>
+<li>&lt;aside></li>
+<li>&lt;details></li>
+<li>&lt;figcaption></li>
+<li>&lt;figure></li>
+<li>&lt;footer></li>
+<li>&lt;header></li>
+<li>&lt;main></li>
+<li>&lt;mark></li>
+<li>&lt;nav></li>
+<li>&lt;section></li>
+<li>&lt;summary></li>
+<li>&lt;time></li>
+        </ul>
+    </article>
+    
+    <p>
+        We've got a few more. 
+    </p>
+    <blockquote>This is for qouting people. Oddly specific.</blockquote>
+    <p>This is a description list. It's like a list, but contains a title and description. They can be a pain.</p>
+    <dl>
+  <dt>Coffee</dt>
+  <dd>Black hot drink</dd>
+  <dt>Milk</dt>
+  <dd>White cold drink</dd>
+</dl>
+
+<p>And finally, tables. These often are misused to make layouts. Don't do that and you won't grow to hate them. Use these for displaying data that ought to be in a table and it'll make sense a lot easier.</p>
+<p>Tables may consist of a header, a body, and a footer. Each of those contains rows and columns, and they're all sort of interlinked. </p>
+<table border="1">
+    <thead>
+        <tr> <!-- "table row" -->
+            <th>Head A1</th> <!-- "table head" -->
+            <th>Head B1</th> <!-- "table head" -->
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr> <!-- "table row" -->
+            <td>Cell A2</td> <!-- "table data" -->
+            <td>Cell B2</td> <!-- "table data" -->
+        </tr>
+        <tr> <!-- "table row" -->
+            <td>Cell A3</td> <!-- "table data" -->
+            <td>Cell B3</td> <!-- "table data" -->
+        </tr>
+    </tbody>
+</table>
+
+<p>But tables gotta be a little flexible. Here, the body's first row cell spans two columns, so there's only one cell in that row:</p>
+
+<table border="1">
+    <thead>
+        <tr> <!-- "table row" -->
+            <th>Head A1</th> <!-- "table head" -->
+            <th>Head B1</th> <!-- "table head" -->
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr> <!-- "table row" -->
+            <td colspan="2">Cell A2/B2</td> <!-- "table data" -->
+        </tr>
+        <tr> <!-- "table row" -->
+            <td>Cell A3</td> <!-- "table data" -->
+            <td>Cell B3</td> <!-- "table data" -->
+        </tr>
+    </tbody>
+</table>
+<p>And we can use rowspan to do the same thing vertically:</p>
+
+<table border="1">
+    <thead>
+        <tr> <!-- "table row" -->
+            <th>Head A1</th> <!-- "table head" -->
+            <th>Head B1</th> <!-- "table head" -->
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr> <!-- "table row" -->
+            <td rowspan="2">Cell A2/A3</td>
+            <td>Cell B2</td><!-- "table data" -->
+        </tr>
+        <tr> <!-- "table row" -->
+            <!-- Since the other has a rowspan 2, we don't need the column here. -->
+            <td>Cell B3</td> <!-- "table data" -->
+        </tr>
+    </tbody>
+</table>
+
+<p>By the way, that border attribute on the table element? It's just for simplicity right now. We won't be using that later.</p>
+
+<p>There are other bits of HTML I'm not mentioning right now. Frames for one, because you should never use them anymore. iFrames are similar, but have a use when plugging in certain widgets from social media. In those cases you'll just get a string of html to copy and paste and they do the rest, so it isn't worth mention. This is about the extent that you'll need for our purposes, and by the time you need the rest you'll know how to find and figure that out. One last thing you'll need to learn: <A href="../lvl-1/basic-layout.html">links, for instance</A>. That one goes to the next lesson. </p>
+
+
+<!-- <body> ends -->
+</body>
+
+<!-- <html> ends -->
+</html>

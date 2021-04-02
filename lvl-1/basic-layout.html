@@ -1,0 +1,301 @@
+<!doctype html>
+<!--
+    Same shit, different page. -->
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Lesson 3 - Basic Layout  |  Chris's Fucking Tutorial.</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, zoom=1">
+  
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+/*
+      There's a difference between HTML comments and CSS comments. Everything within a <Style> tag is CSS. It is not HTML. This is the CSS comment annotation.
+      
+      
+      Important ground rules for css: 
+          - case matters. "THIS" is not the same as "This".
+          - the first part outside the squiggly brackets is called the SELECTOR, it selects elements that qualify, and applies the second part within the brackets: RULES. 
+          - RULES are again separated by semi-colons. They can all run together, but for your own sake use line breaks. The *LAST* rule does not need a semi-colon, but it doesn't hurt.
+          - You'll want to practice organizing. Organize groups of rules that are associated, organize groups of selectors that are associated. There's a thing called INHERITANCE we'll talk on soon and organization is key. 
+  */
+
+
+/*
+    Guess what? You don't need class names at all. You can refer to elements directly, including the body: remember that everything within the body will have the rules applied.
+    
+    Not only that, but you can link them together in A LOT of ways. 
+*/
+
+body {
+	font-family: Helvetica, Verdana, sans-serif;
+	font-size: 16px;
+	color: #333;
+	background: #ccc;
+	line-height: 1.4;
+	/*
+        These are some very basic styles I want applied all over, and otherwise I'll override them. 
+    */
+}
+
+/* The first three items below are referred to by the actual page, regarding images. Most of this is explained there.*/
+
+.block-image {
+	display: block;
+	/*the display rule is where we could also set "inline" or "inline-block", which is a weird hybrid that I won't get into just yet. */
+	width: 75%;
+}
+
+.margin-trick {
+	margin: 0 auto;
+}
+
+.image-width {
+	width: 100%;
+	max-width: 450px;
+}
+
+
+/* 
+    
+    What follows below is the rest of the styles used on this page and related... It might seem like a lot (it kind of is) but READ IT. Twice. 
+
+*/
+
+
+/* 
+    So here we have all these elements (selectors, in this context) separated by commas: The rules set apply to all selected. 
+    You could mix in class names here as well, just use the period to denote a class name. Elements don't use any identifier. 
+*/
+
+.serif-font,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: Serif;
+	text-transform: capitalize;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 0.5em;
+	margin: 1.618em 0 1em 0;
+	color: darkslateblue;
+}
+
+
+/*
+    Here you see an element AND a class name: These rules only apply to article elements with the class of 'main-content'. If I put that class on another element, it wouldn't work. 
+*/
+
+article.main-content {
+	background: #fff;
+	max-width: 900px;
+	/* All the content is fitting within this width. The element has a white background laying over gray, since the body (this element's parent) has a gray background. */
+	margin: 0 auto;
+	/* This is shorthand, it means the same thing as this:
+            margin-top: 0; 
+            margin-right: auto; 
+            margin-bottom: 0; 
+            margin-left: auto; 
+
+        You could also do margin: 10px auto 20px auto. The order matters: TOP, RIGHT, BOTTOM, LEFT. It goes clockwise. 
+        
+        Since the element is a block element, it's 100% the width of the page. But it also has a max-width, so it can't be bigger. "auto" when used on left and right tells it to space equally, or center.
+        You could just use 'width' instead of max width, but the problem there is once you get smaller that stays wide. At some point in smaller screens, you want it covering the whole page.
+    */
+	padding: 1em;
+	/*
+        Similarly, this is shorthand for padding-top: 1em; padding-right: 1em...works the same as margin above.
+        An "em" is a unit like "px". There's lots of units, em really is what you ought to stick to. Basically the way this works is that since the body has a font-size of 16px and that's where this element is getting its font-size declaration from, that's what 1em is equal to. You could do 2em and it'd be twice as big, and so on. EM is generally a good practice to get into. It's sort of like a percentage, but not.  
+        
+        A note: There is no "auto" trick for padding, it doesn't work like that. You can use percentages, or em units, or any of the other units we haven't gotten to though. 
+    */
+}
+
+
+/* Our dark box on top*/
+
+header {
+	background: #444;
+	color: #fff;
+	padding: 1em;
+}
+
+
+/* Here we're saying "any h2 or h3 element within the header", and other h2 or h3 elements won't have this rule applied*/
+
+header h1,
+header p {
+	border-bottom: 0;
+	font-family: Sans-serif;
+	margin: 0;
+	line-height: 1;
+	color: #fff;
+}
+
+header p {
+	font-style: italic;
+	font-weight: normal;
+	margin-bottom: 1em;
+	color: rgba(255, 255, 255, 0.65);
+	padding-left: 1em;
+}
+
+
+/*
+The CONTAINER of the list items has values for margin and padding, as well as defining the style of the list. 
+Since we're using this as a nav, we don't need bullets, and we don't want the margin or padding defined by the container. 
+*/
+
+nav {
+	width: 100%: display: block;
+}
+
+nav ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	display: block;
+	width: 100%;
+}
+
+nav ul li {
+	width: 32.97%;
+	/*That's an oddly specific value for 1/3rd even when it doesn't equal 1/3rd. That's because this is the simple, bad way to do this, but it's a step. We'll fix it later. */
+	display: inline-block;
+	/*inline-block says that it shouldn't cause line breaks so they sit next to eachother horizontally, but otherwise to act like a block: Meaning it has margin, width, padding, and height. */
+}
+
+
+/*
+    When doing nav menus, it's best to apply paddings and such to the link within the list item and NOT the list item itself. Users click links, not items.
+*/
+
+nav ul li a {
+	display: block;
+	/*a elements are inline, we need them to act like a block */
+	/*Since they're within the list-item, which has a width set, these blocks are 100% of their parent: the list item styled above. */
+	padding: 5px 10px;
+	/* It's actually important to give certain 'button' style links padding: users can click the padded space. If you put it on the list item above, that padding wouldn't be clickable. That's annoying. */
+	background: #666;
+	color: #fff;
+	text-decoration: none;
+	/*a elements have an underline but we don't want it.*/
+	text-align: center;
+}
+
+
+/* Give it a little thought and you can make stuff look pretty good. */
+
+blockquote {
+	font-size: 120%;
+	/*Whatever it would be, 120% of that. */
+	font-style: italic;
+	color: #777;
+	font-family: serif;
+	line-height: 1.2;
+	border-left: 3px solid lightblue;
+	/* By the way there are a bunch of "named colors", you can find them pretty easily. */
+	padding: 1em 1.618em;
+}
+
+a.btn-link {
+	background: red;
+	color: rgba(255, 255, 255, 0.9);
+	font-size: 140%; 
+	font-weight: bold;
+	text-decoration: none;
+	text-align: center;
+	display: block;
+	padding: .618em 1em;
+	margin: 1em auto 1.618em;
+	max-width: 320px;
+	border: 1px solid rgba(0, 0, 0, 0.8);
+    border-radius: 25px;
+    
+}
+  </style>
+</head>
+
+<body>
+    <article class="main-content">
+        <header>
+            <h1>Chris's Fucking Tutorial</h1>
+            <p>An exercise in teaching a russian jew how to do something other than smoke weed.</p>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="#section1">Part 1</a>
+                        </li>
+                        <li>
+                            <a href="#section2">Part 2</a>
+                        </li>
+                        <li>
+                            <a href="#section3">Part 3</a>
+                        </li>
+                    </ul>
+                </nav>
+        </header>
+        <section class="page-content" id="section1">
+            <h3>Much better, right?</h3>
+            <p>This is a fairly basic example of how a page should look semantically: Nav at the top, content below. You see that each link doesn't go to a page but just jumps down the screen: That's an "anchor". The href refers to the ID of the element on the page. Same way a style can be applied to an ID with a hash.</p>
+            <p>As to the layout, let's break down what happened: I put the whole page in an article, "main-content" class. Typically an article wouldn't be the whole page, but in this case we don't have an actual "site", just individual pages. So it makes sense. </p>
+            <p>That article holds the white box that's centered on the page; it's centered due to the margin and the max-width properties. That's the "auto" margin trick and it's really useful, so keep it in mind. It only works with block elements that have a width which is less than the width of the container.</p>
+            <p>Within that centered container we have a header, then sections. Within the header we have headlines, followed by a nav element containing a list of nav-items. All of that wraps up and we're on to individual sections of the page.</p>
+            <p>On the note of that auto margin trick, here's the perfect use: Images. Images are inline elements, but they act like shit that way, so mostly we change them. The format I use is to make it act like a block level element and position it from there. Here's three examples:</p>
+<img src="https://spy.com/wp-content/uploads/2017/08/samuel-l-jackson-movies.jpg?w=958&h=599&crop=1" />
+Your basic image. It's an inline element, and since it's an image it'll just ignore the container and spill over. Ugly.
+<p>So usually you'd do this:
+</p>
+    <img src="https://spy.com/wp-content/uploads/2017/08/samuel-l-jackson-movies.jpg?w=958&h=599&crop=1" class="block-image" />
+
+<p> Make it act like a block, and tell it what width to be. The width percent is relative to the parent: Since the parent has a certain width, the image will be 75% of that width. It's worth mention: Percentage values always represent width. Even if you set "height: 50%", that 50% value is 50% of the available width, not 50% of the available height. This is a weird quirk that doesn't usually come up, but it goes to show that there's more going on than you might think. <sup>It also shows that I know my shit. Gotta flex, son.</sup> </sup></p>
+<p>Anyway, back to the image. It's in the container all the time now, but still sitting off to the left all stupid. So the margin trick...</p>
+    <img src="https://spy.com/wp-content/uploads/2017/08/samuel-l-jackson-movies.jpg?w=958&h=599&crop=1" class="block-image margin-trick" />
+
+<p> .. and we have a centered image, but let's say the page was viewed on a smaller screen: Make your browser window smaller. 50% might be too small and ugly. So we apply width at 100% and then give it a maximum width:</p>
+    <img src="https://spy.com/wp-content/uploads/2017/08/samuel-l-jackson-movies.jpg?w=958&h=599&crop=1" class="block-image margin-trick image-width" />
+</p>
+<p>
+    That image looks similar to the second, but on smaller screens it fills the whole thing.     
+</p>
+        </section>
+
+        <section class="page-content" id="section2">
+            <h3>Break for Samuel.</h3>
+            <p>Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs. Some don't, become nothing. She starred in one of the ones that became nothing. </p>
+            <blockquote>Look, just because I don't be givin' no man a foot massage don't make it right for Marsellus to throw Antwone into a glass motherfuckin' house, fuckin' up the way the nigger talks. 
+            </blockquote>
+            <p>My money's in that office, right? If she start giving me some bullshit about it ain't there, and we got to go someplace else and get it, I'm gonna shoot you in the head then and there. Then I'm gonna shoot that bitch in the kneecaps, find out where my goddamn money is. She gonna tell me too. Hey, look at me when I'm talking to you, motherfucker. You listen: we go in there, and that nigga Winston or anybody else is in there, you the first motherfucker to get shot. You understand? </p>
+
+        </section>
+        
+        <section class="page-content" id="section3">
+
+            <h3>A little forethought can make a big difference.</h3>
+            <p>
+                You can get wild with all the options here, but try to do this instead: understand what's possible, but focus on what's <Strong><em>good</em></strong>. I mention the golden ratio, it's used everywhere because it looks good and natural. I don't have to think about it hard, I just put it in there. Get those habits, because you can come to a full stop in progress nitpicking the tiniest details. Come back to those later. Focus on the big.
+            </p>
+            <p>
+                For instance, we've got <a href="javascript:void(0);">normal links</a>, but we can make them look very attention-grabbing if we want to:</a>
+            </p>
+            <a href="javascript:void(0);" title="This text is shown when the user hovers over it. Can be useful but there's better ways. You can put a title on any element and it'll work the same way." class="btn-link">View Results!</a>
+            <!-- 
+            "javascript:void(0);" is slang for "do nothing". You might see others use "#" instead, and it seems way easier. Don't do that. That only does nothing *most* of the time, not all the time. Don't learn bad habits.
+            -->
+            <p>
+               You might notice that the style block in the head is pretty big and you can imagine it can get bigger. Maybe you can't, but it can. So in the next page we're going to move this shit into a different file or two and work with it from there. 
+            </p>
+                        <a href="../lvl-1/intermediate.html" title="This link actually works, click it." class="btn-link">Go to the next page, asshole.</a>
+
+        </section>
+        
+    </article>
+</body>
+
+<!-- <html> ends -->
+</html>
