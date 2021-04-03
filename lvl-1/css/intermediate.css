@@ -2,3 +2,6 @@ header small {
      display: block; 
      
 }
+
+.beforeafter-example:before { content: 'I come before'; color: blue; }
+ .beforeafter-example:after { content: 'I come after'; color: red; }                 
