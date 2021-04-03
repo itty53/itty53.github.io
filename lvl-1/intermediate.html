@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="css/main.css">
 
 <!-- All that stuff we did before? In this file now. -->
-  <link rel="stylesheet" href="css/basic-layout.css">
+  <link rel="stylesheet" href="css/basic-layout.css?v=1">
 
 <!-- 
     And all the stuff for this page is in this file. Get used to working with multiple files open and jumping back and forth. 
@@ -25,7 +25,7 @@
 
     Anyway, open the file below in a separate window and get used to going back and forth. 
 -->
-  <link rel="stylesheet" href="css/intermediate.css">
+  <link rel="stylesheet" href="css/intermediate.css?v=1">
 
   <style>
       
@@ -49,8 +49,8 @@
                     Selectors: 
                     <ul>
                         <li><a href="#specificity">Specificity and Inheritance</a></li>
-                    <li>Containers, (Not) Parents, Siblings, Children</li>
-                    <li>Hover, Focus, Active</li>
+                    <li><a href="#selectors">Selectors: Containers, (Not) Parents, Siblings, Children and more.</a></li>
+                    <li><a href="#pseudos">Pseudo-selectors: Hover, Focus, Active, Before and After</a></li>
                     <li>Attributes, etc.</li>
                     </ul>
                 </li>
@@ -87,21 +87,145 @@
         <h2>Specificity and Inheritance</h2>
             <p>
                 Specificity and inheritance determine how rules are applied. Let's check out the rules below:
+                            </p>
+
                 <!-- The <pre> tag is used to make text breaks recognized by the browser. Note there are no <br> tags, just line breaks in the code -->
                 <pre>
+                    .main-body h1 { color: red } 
                     h1 { color: blue }                    
-                    .main-body { color: red } 
                 </pre>
                 and the markup:
                 <pre>
                     &lt;div class="main-body">
-                        &lt;h1>What color am I going to be?</h1>
+                        &lt;h1>What color am I going to be?&lt;/h1>
                     &lt;/div>
                 </pre>
-            </p>
+                <p>
+                    We've got two rules that are conflicting, and if you run it you'll see the color to be red. That's because <code>.main-body h1</code> is more <strong>specific.</strong> The more specific the selector, chances are it'll override other rules targeting the same thing. ID selectors, where we use a <code>#id-name</code> rather than a <code>.class-name</code> are almost the most specific. Inline-style, like <code>&lt;div style="font-weight: bold">...&lt;/div></code>, are the absolute most specific. Unless you throw the <code>!important</code> flag around. As such: <code>.class { font-weight: bold !important; }</code>. <code>!important</code> overrides other rules that don't have it, and can seem useful. Chances are though if you're using that, you're doing it wrong. It's hard to avoid over the long haul though, just try to avoid it. 
+                </p>
+                <p>There's another thing going on: that <code>.main-body h1</code> uses <strong>inheritance.</strong> It means "any h1 within a container that has the class of .main-body". In this case, .main-body could be applied to <em>any</em> element in the container hierarchy. So this would work as well:</p>
+                <pre>
+                    &lt;div class="main-body">
+                        &lt;div class="another-class">
+                            &lt;h1>What color am I going to be?&lt;/h1>
+                        &lt;/div>
+                    &lt;/div>
+                </pre>
+                    <p><code>.main-body h1</code> still applies the red color here. This is called a <strong>selector</strong>, while the different bits within {... } are called <strong>rules.</strong> We're going to talk about selectors, because they're super important to understand.</p>
+                    <p>One big thing I already mentioned in an earlier lesson: Rules are read from top to bottom. If you provide the same selector two separate rules, the one that comes last is the one used. For example:</p>
+                    <pre>
+                        h1 { color: red } 
+                        h1 { color: blue }   
+                    </pre>
+                    <p>The rule would be <code>color: blue</code>. You've overwritten the first rule. If a rule that is more specific comes before another less-specific one (as the first example here), the <Strong>specificity overrides inheritance.</Strong></p>
+        </article>
+        <article id="selectors">
+            <h2>Selectors: Containers, (Not) Parents, Siblings, Children and more.</h2>
+            <p>You learned about inheritance, but it's a very loose inheritance. There's more specific ways to select (if need be).</p>
+            <pre>
+                .main-body > h1 { color: blue }
+                ...
+                
+                    &lt;div class="main-body">
+                        &lt;h1>I will be blue&lt;/h1>
+                        &lt;div class="child">
+                            &lt;h1>Just like the GOP, that rule won't apply to me.&lt;/h1>
+                        &lt;/div>
+                    &lt;/div>
+            </pre>
+            <p>That's the direct-child selector. It only selects its direct children (shocker). Here's another:</p>
+            <pre>
+                .main-body + h1 { color: blue }
+                ...
+                
+                    &lt;div class="main-body">
+                        &lt;h1>I will not blue&lt;/h1>
+                    &lt;/div>
+                    &lt;h1>This will be blue.&lt;/h1>
+            </pre>
+            <p>This selects a <b>sibling.</b> "Any h1 element that directly <em>follows</em> .main-body". It is not within, not a child. Another version of this:</p>
+            <pre>
+                .main-body ~ h1 { color: blue }
+                ...
+                    &lt;h1>This will be blue.&lt;/h1>
+                    &lt;div class="main-body">
+                        &lt;h1>I will not blue&lt;/h1>
+                    &lt;/div>
+            </pre>
+            <p>Instead of "what comes after" it's "what comes before". I'll be honest I've never actually used this, and you likely won't either. One you will use is multiple-classes:</p>
+                        <pre>
+                    .main-body { color: magenta }
+                    .main-body.blue { color: blue }
+                    .main-body.red { color: red }
+                ...
+                    &lt;div class="main-body blue">
+                        &lt;h1>This will be blue.&lt;/h1>
+                    &lt;/div>
+                    &lt;div class="main-body red">
+                        &lt;h1>This will be red.&lt;/h1>
+                    &lt;/div>
+                    &lt;div class="main-body">
+                        &lt;h1>This will be magenta.&lt;/h1>
+                    &lt;/div>
+            </pre>
+            <p><code>.main-body.red</code> only applies to an element with both <code>.main-body</code> <em>and</em> <code>.blue</code>. Since it is more specific, it overrides the magenta rule. And another helpful tool, combining selectors to apply the same rule:</p>
+                  <pre>
+                    h1, 
+                    p { color: red }
+                ...
+                        &lt;h1>This will be blue.&lt;/h1>
+                        &lt;p>This will also be blue.&lt;/p>
+            </pre>
+            <p>You can use that with any number of different selectors. Note that they just need to be separated by a comma, the new line isn't necessary (but is helpful).</p>
+        </article>
+        
+        <article id="pseudos">
+            <h2>Pseudo-selectors: Hover, Focus, Active, Before and After</h2>
+            <p>This is going to rapidly get more complex. Let's look at <code>:hover</code>.</p>
+            <pre>
+        .main-body:hover { color: blue }
+        ...
+
+        &lt;div class="main-body">
+            &lt;h1>I will change to blue when the mouse is over my parent container&lt;/h1>
+            &lt;div class="child">
+                &lt;h1>I would be too if the main-body is hovered because I'm also within that same parent.&lt;/h1>
+            &lt;/div>
+        &lt;/div>
+            </pre>        
+            <p>Useful for indicating "this is a clickable object". Not all links look like the blue with the underline, and often we don't want them to. Here's one way you'll often see :hover used:</p>
+                        <pre>
+        a.link-class { text-decoration: none; color: blue; }
+        a.link-class:hover { text-decoration: underline; color: dark-blue; }
+            </pre>        
+            <p>This way the link doesn't have an ugly line under unless you have the mouse over it. There's other use-cases for :hover, like displaying a little menu icon when a particular element is hovered over. That's a bit advanced for right now, but we'll get there in the end.</p>
+            <p><code>:focus</code> and <code>:active</code> are related in that they're only based on user-interaction. They're often all used together.</p>
+                                    <pre>
+        a.link-class { text-decoration: none; color: blue; }
+
+        a.link-class:hover,
+        a.link-class:focus { text-decoration: underline; color: dark-blue; }
+
+        a.link-class:active { text-decoration: underline; color: orange; }
+            </pre>        
+            <p>If the user uses the Tab key on a site, you'll see any clickable object get a little outline around it: that means the object has "focus". When you click your mouse down on an object (but don't release), you're in the :active mode now. In the code above, it'll treat :hover and :focus the same. You will almost always want to do that, because it's more <b>accessible</b>. People navigate with their keyboard, they need to know where things are and be able to use your site without a mouse. Same principle? Don't ever use these classes in such a way that a user CAN'T see the rule applied if they can't hover. Tablets, mobile phones? They don't hover. If you're going to do that, be sure to create fallbacks for your users. :focus is typically enough.</p>
+        <p><code>:before</code> and <code>:after</code> are identical in use, but the difference will be clear in the example:</p>
+                    <pre>
+            .main-body:before { content: 'I come before'; color: blue; }
+            .main-body:after { content: 'I come before'; color: red; }
+            ...
+            
+                &lt;div class="main-body">
+                    I'm in the middle.
+                &lt;/div>
+            </pre>        
+<p>What that looks like:</p>
+<div class="beforeafter-example">I'm in the middle.</div>
+        
         </article>
     </div>
 </body>
 
 <!-- <html> ends -->
 </html>
+        
